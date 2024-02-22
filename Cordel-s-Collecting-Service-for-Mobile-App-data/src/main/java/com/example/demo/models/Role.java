@@ -7,6 +7,7 @@ package com.example.demo.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiModel;
@@ -25,9 +26,9 @@ public class Role {
     @ApiModelProperty(notes = "The name of the role")
     private String name;
 
-    @OneToMany()
     @ApiModelProperty(notes = "The set of users associated with the role")
-    private Set<User> users = new HashSet<>();
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users = new LinkedHashSet<>();
 
     /**
      * Constructs a role object with the given name.
@@ -72,6 +73,10 @@ public class Role {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     /**

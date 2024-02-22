@@ -25,7 +25,7 @@ public class Company {
     @ApiModelProperty(notes = "The name of the company")
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "company")
     @ApiModelProperty(notes = "The set of users associated with the company")
     private Set<User> users = new HashSet<>();
 
