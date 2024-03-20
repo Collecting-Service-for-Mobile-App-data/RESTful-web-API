@@ -45,7 +45,7 @@ public class UserController {
     private static final Logger LOGGER = Logger.getLogger(UserController.class.getName());
 
     @GetMapping("/company/{id}")
-    public ResponseEntity<?> getAllUserBasedOnCompany(@PathVariable long id) { // Use @PathVariable instead of @RequestParam
+    public ResponseEntity<?> getAllUserBasedOnCompany(@PathVariable long id) {
         Company company = this.companyService.findById(id);
         if (company == null) {
             return new ResponseEntity<>("Didn't find company", HttpStatus.NOT_FOUND);

@@ -80,6 +80,6 @@ public class Company {
      * @return True if the company is valid, otherwise false.
      */
     public boolean isValid() {
-        return !" ".equals(this.name) && this.name != null;
+        return !" ".equals(this.name) && this.name != null && !this.name.isEmpty();
     }
 }

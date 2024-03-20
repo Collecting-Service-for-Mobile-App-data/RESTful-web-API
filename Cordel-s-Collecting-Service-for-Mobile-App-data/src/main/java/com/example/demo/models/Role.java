@@ -85,6 +85,6 @@ public class Role {
      * @return True if the role is valid, otherwise false.
      */
     public boolean isValid() {
-        return !" ".equals(this.name) && this.name != null;
+        return !" ".equals(this.name) && this.name != null && !this.name.isEmpty();
     }
 }
