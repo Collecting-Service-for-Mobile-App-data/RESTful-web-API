@@ -20,7 +20,6 @@ public class UserDTO {
         setId(id);
         setEmail(email);
         setCompany(company);
-
     }
 
     public long getId() {

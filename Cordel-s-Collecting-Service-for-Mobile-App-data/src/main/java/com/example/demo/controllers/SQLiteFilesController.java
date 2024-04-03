@@ -16,44 +16,16 @@ public class SQLiteFilesController {
   @Autowired
   private SQLiteFilesService sqliteFilesService;
 
-  @GetMapping("/")
-  public ResponseEntity<List<SQLiteFiles>> getAllSQLiteFiles() {
-    List<SQLiteFiles> list = sqliteFilesService.getAllSQLiteFiles();
-    return ResponseEntity.ok(list);
-  }
-
-  @GetMapping("/{id}")
-  public ResponseEntity<SQLiteFiles> getSQLiteFileById(@PathVariable Long id) {
-    return sqliteFilesService.getSQLiteFileById(id)
-        .map(ResponseEntity::ok)
-        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+  @GetMapping("/company/{id}")
+  public ResponseEntity<List<SQLiteFiles>> getAllSQLiteFilesByCompany(@PathVariable long id) {
+    List<SQLiteFiles> sqLiteFiles = this.sqliteFilesService.getAllByCompany(id);
+    return new ResponseEntity<>(sqLiteFiles, HttpStatus.OK);
   }
 
   @PostMapping("/")
   public ResponseEntity<SQLiteFiles> createSQLiteFile(@RequestBody SQLiteFiles sqliteFiles) {
     SQLiteFiles savedFile = sqliteFilesService.saveSQLiteFile(sqliteFiles);
     return new ResponseEntity<>(savedFile, HttpStatus.CREATED);
-  }
-
-  @PutMapping("/{id}")
-  public ResponseEntity<SQLiteFiles> updateSQLiteFile(@PathVariable Long id, @RequestBody SQLiteFiles sqliteFiles) {
-    return sqliteFilesService.getSQLiteFileById(id)
-        .map(existingFile -> {
-          sqliteFiles.setId(id); // Make sure to update the existing file.
-          SQLiteFiles updatedFile = sqliteFilesService.saveSQLiteFile(sqliteFiles);
-          return new ResponseEntity<>(updatedFile, HttpStatus.OK);
-        })
-        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-  }
-
-  @DeleteMapping("/{id}")
-  public ResponseEntity<?> deleteSQLiteFile(@PathVariable Long id) {
-    return sqliteFilesService.getSQLiteFileById(id)
-        .map(file -> {
-          sqliteFilesService.deleteSQLiteFile(id);
-          return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        })
-        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 }
 
