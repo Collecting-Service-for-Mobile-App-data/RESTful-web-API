@@ -54,9 +54,10 @@ public class User {
      * @param email    The email address of the user.
      * @param password The password of the user.
      */
-    public User(String email, String password) {
+    public User(String email, String password, Company company) {
         setEmail(email);
         setPassword(password);
+        setCompany(company);
     }
 
     /**

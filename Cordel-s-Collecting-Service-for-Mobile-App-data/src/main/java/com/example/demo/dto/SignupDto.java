@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import com.example.demo.models.Company;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiModel;
 
@@ -15,9 +16,12 @@ public class SignupDto {
     @ApiModelProperty(notes = "Password for the user")
     private final String password;
 
-    public SignupDto(String username, String password) {
+    private final Company company;
+
+    public SignupDto(String username, String password, Company company) {
         this.email = username;
         this.password = password;
+        this.company = company;
     }
 
     /**
@@ -36,6 +40,10 @@ public class SignupDto {
      */
     public String getPassword() {
         return password;
+    }
+
+    public Company getCompany() {
+        return this.company;
     }
 
 }

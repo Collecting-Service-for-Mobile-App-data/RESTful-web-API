@@ -78,7 +78,7 @@ public class AccessUserService implements UserDetailsService {
      * @param password the password you want for the user.
      * @return error massage if user didn't get created. If created it returns null.
      */
-    public String tryCreateNewUser(String email, String password) {
+    public String tryCreateNewUser(String email, String password, Company company) {
         String errorMessage;
         errorMessage = checkEmailRequirements(email);
         if(errorMessage != null) {
@@ -86,7 +86,7 @@ public class AccessUserService implements UserDetailsService {
         }
         errorMessage = checkPasswordRequirements(password);
         if(errorMessage == null) {
-            createUser(email,password);
+            createUser(email,password, company);
         }
         return errorMessage;
     }
@@ -137,10 +137,10 @@ public class AccessUserService implements UserDetailsService {
      * @param email the mail you want for the user.
      * @param password the password you want for the user.
      */
-    private void createUser(String email, String password) {
+    private void createUser(String email, String password, Company company) {
         Role userRole = roleRepository.findOneByName("ROLE_USER");
         if (userRole != null) {
-            User user = new User(email, createHash(password));
+            User user = new User(email, createHash(password), company);
             user.addRole(userRole);
             userRepository.save(user);
         }

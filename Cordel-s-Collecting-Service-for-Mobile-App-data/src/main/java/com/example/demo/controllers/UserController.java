@@ -107,7 +107,7 @@ public class UserController {
     public ResponseEntity<String> createUser(@RequestBody SignupDto signupDto) {
         try {
             String errorMessage = accessUserService.tryCreateNewUser(signupDto.getEmail(),
-                    signupDto.getPassword());
+                    signupDto.getPassword(), signupDto.getCompany());
             ResponseEntity<String> response;
             if (errorMessage == null) {
                 response = ResponseEntity.status(HttpStatus.CREATED).build();
