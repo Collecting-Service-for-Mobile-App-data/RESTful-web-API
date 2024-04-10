@@ -22,6 +22,12 @@ public class SQLiteFilesController {
     return new ResponseEntity<>(sqLiteFiles, HttpStatus.OK);
   }
 
+  @GetMapping("/all")
+  public ResponseEntity<List<SQLiteFiles>> getAllSQLiteFiles() {
+    List<SQLiteFiles> sqLiteFiles = this.sqliteFilesService.getAllSQLiteFiles();
+    return new ResponseEntity<>(sqLiteFiles, HttpStatus.OK);
+  }
+
   @PostMapping("/")
   public ResponseEntity<SQLiteFiles> createSQLiteFile(@RequestBody SQLiteFiles sqliteFiles) {
     SQLiteFiles savedFile = sqliteFilesService.saveSQLiteFile(sqliteFiles);
