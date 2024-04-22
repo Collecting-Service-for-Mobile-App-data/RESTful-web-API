@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.SQLiteIsCheckedDTO;
 import com.example.demo.models.Company;
 import com.example.demo.models.SQLiteFiles;
 import com.example.demo.repository.SQLiteFilesRepository;
@@ -12,6 +13,10 @@ import java.util.Optional;
 public class SQLiteFilesService {
 
   private final SQLiteFilesRepository sqliteFilesRepository;
+
+  public SQLiteFiles findById(long id) {
+    return this.sqliteFilesRepository.findById(id).orElse(null);
+  }
 
   @Autowired
   public SQLiteFilesService(SQLiteFilesRepository sqliteFilesRepository) {
@@ -39,13 +44,18 @@ public class SQLiteFilesService {
 
   /**
    * Return all files based on company
+   *
    * @param id id of the compnay that you want to find files from
    * @return List of sql files
    */
-  public List<SQLiteFiles> getAllByCompany(Long id ) {
+  public List<SQLiteFiles> getAllByCompany(Long id) {
     Company company = this.companyService.findById(id);
     return this.sqliteFilesRepository.findAllByCompany(company);
   }
 
-  // Additional service methods can be defined here.
+  public void updateCheckedStatus(SQLiteIsCheckedDTO sqLiteIsCheckedDTO) {
+    SQLiteFiles sqliteFileOptional = findById(sqLiteIsCheckedDTO.getId());
+    sqliteFileOptional.setChecked(sqLiteIsCheckedDTO.isChecked());
+    this.sqliteFilesRepository.save(sqliteFileOptional);
+  }
 }

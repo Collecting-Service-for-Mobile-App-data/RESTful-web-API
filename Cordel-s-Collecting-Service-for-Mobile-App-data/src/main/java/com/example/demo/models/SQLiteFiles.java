@@ -22,6 +22,8 @@ public class SQLiteFiles {
   @JoinColumn(name = "company_id", referencedColumnName = "id")
   private Company company;
 
+  private boolean isChecked;
+
   @Lob
   private byte[] sqliteFile;
 
@@ -37,6 +39,22 @@ public class SQLiteFiles {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public boolean isChecked() {
+    return this.isChecked;
+  }
+
+  public void setChecked(boolean checked) {
+    this.isChecked = checked;
+  }
+
+  public void setSqliteFile(byte[] sqliteFile) {
+    this.sqliteFile = sqliteFile;
+  }
+
+  public byte[] getSqliteFile() {
+    return sqliteFile;
   }
 
   public Date getDate() {
@@ -64,7 +82,7 @@ public class SQLiteFiles {
   }
 
   public byte[] getSQLiteFile() {
-    return sqliteFile;
+    return this.sqliteFile;
   }
 
   public void setSQLiteFile(byte[] sqliteFile) {

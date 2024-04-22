@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.dto.SQLiteIsCheckedDTO;
 import com.example.demo.models.SQLiteFiles;
 import com.example.demo.service.SQLiteFilesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,13 @@ public class SQLiteFilesController {
   public ResponseEntity<SQLiteFiles> createSQLiteFile(@RequestBody SQLiteFiles sqliteFiles) {
     SQLiteFiles savedFile = sqliteFilesService.saveSQLiteFile(sqliteFiles);
     return new ResponseEntity<>(savedFile, HttpStatus.CREATED);
+  }
+
+  @PutMapping("/checked")
+  public  ResponseEntity<?> isChecked(@RequestBody SQLiteIsCheckedDTO sqLiteIsCheckedDTO) {
+    this.sqliteFilesService.updateCheckedStatus(sqLiteIsCheckedDTO);
+    return new ResponseEntity<>("Updated successfully", HttpStatus.OK);
+
   }
 }
 
