@@ -53,10 +53,6 @@ public class SQLiteFiles {
     this.sqliteFile = sqliteFile;
   }
 
-  public byte[] getSqliteFile() {
-    return sqliteFile;
-  }
-
   public Date getDate() {
     return date;
   }
