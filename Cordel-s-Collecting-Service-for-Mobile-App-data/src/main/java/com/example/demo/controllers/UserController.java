@@ -120,4 +120,10 @@ public class UserController {
             return ResponseEntity.badRequest().body(JSONEEXCEPTIONMESSAGE);
         }
     }
+
+    @GetMapping("/getuser/{id}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+        UserDTO userDTO = this.accessUserService.findUserDTOById(id);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
+    }
 }

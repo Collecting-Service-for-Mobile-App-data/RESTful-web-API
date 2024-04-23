@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -30,7 +29,7 @@ public class FTPService {
             if(!FTPReply.isPositiveCompletion((ftpClient.getReplyCode()))) {
                 return false;
             }
-            ftpClient.login(ftpUsername, ftpPassword);
+            ftpClient.login(this.ftpUsername, this.ftpPassword);
             ftpClient.enterLocalPassiveMode();
             ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
             try (ByteArrayInputStream inputStream = new ByteArrayInputStream(fileData)) {

@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.UserDTO;
 import com.example.demo.models.Company;
 import com.example.demo.models.Role;
 import com.example.demo.models.User;
@@ -169,5 +170,11 @@ public class AccessUserService implements UserDetailsService {
 
     public User findById(Long id) {
         return this.userRepository.findById(id).orElse(null);
+    }
+
+    public UserDTO findUserDTOById(Long id) {
+        User user = findById(id);
+        UserDTO userDTO = new UserDTO(user.getId(), user.getEmail(), user.getCompany());
+        return userDTO;
     }
 }

@@ -25,6 +25,7 @@ public class SQLiteFiles {
   private boolean isChecked;
 
   @Lob
+  @Column(length = 20971520)
   private byte[] sqliteFile;
 
   public SQLiteFiles() {
