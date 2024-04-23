@@ -31,6 +31,14 @@ public class SQLiteFiles {
     // Default constructor
   }
 
+  public SQLiteFiles(Date date, User user, Company company, boolean isChecked, byte[] sqliteFile) {
+    this.date = date;
+    this.user = user;
+    this.company = company;
+    this.isChecked = isChecked;
+    this.sqliteFile = sqliteFile;
+  }
+
   // Getters and setters
 
   public Long getId() {

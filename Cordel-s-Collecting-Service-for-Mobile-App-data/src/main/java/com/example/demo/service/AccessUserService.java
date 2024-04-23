@@ -166,4 +166,8 @@ public class AccessUserService implements UserDetailsService {
         List<User> users = this.userRepository.findAllByCompany(company);
         return users;
     }
+
+    public User findById(Long id) {
+        return this.userRepository.findById(id).orElse(null);
+    }
 }

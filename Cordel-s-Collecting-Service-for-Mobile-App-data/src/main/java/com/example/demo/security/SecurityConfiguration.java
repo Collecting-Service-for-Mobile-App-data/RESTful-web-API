@@ -53,6 +53,8 @@ public class SecurityConfiguration {
                 .requestMatchers("/api/user/authenticate").permitAll()
                 .requestMatchers("/api/user").permitAll()
                 .requestMatchers("/api/user/sessionuser").permitAll()
+                .requestMatchers("/api/sqlite-files/upload").permitAll()
+                .requestMatchers("/api/sqlite-files/file").permitAll()
                 .requestMatchers("/api/sqlite-files/checked").permitAll()
                 .requestMatchers("/api/user/company/").hasRole("ADMIN")
                 .requestMatchers("/api/sqlite-files/company/").hasRole("ADMIN")

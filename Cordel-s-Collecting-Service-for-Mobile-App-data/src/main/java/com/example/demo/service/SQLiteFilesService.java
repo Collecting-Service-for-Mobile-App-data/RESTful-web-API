@@ -1,13 +1,17 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.SQLiteFileCreateDTO;
+import com.example.demo.dto.SQLiteFileGetDTO;
 import com.example.demo.dto.SQLiteIsCheckedDTO;
 import com.example.demo.models.Company;
 import com.example.demo.models.SQLiteFiles;
+import com.example.demo.models.User;
 import com.example.demo.repository.SQLiteFilesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SQLiteFilesService {
@@ -26,8 +30,15 @@ public class SQLiteFilesService {
   @Autowired
   CompanyService companyService;
 
-  public List<SQLiteFiles> getAllSQLiteFiles() {
-    return sqliteFilesRepository.findAll();
+  @Autowired
+  AccessUserService accessUserService;
+
+  public List<SQLiteFileGetDTO> getAllSQLiteFiles() {
+    List<SQLiteFiles> sqLiteFilesList = this.sqliteFilesRepository.findAll();
+    List<SQLiteFileGetDTO> sqLiteFileslistDTO = sqLiteFilesList.stream()
+            .map(sqLiteFiles -> new SQLiteFileGetDTO(sqLiteFiles.getId(), sqLiteFiles.getDate(), sqLiteFiles.getUser(), sqLiteFiles.isChecked()))
+            .collect(Collectors.toList());
+    return sqLiteFileslistDTO;
   }
 
   public Optional<SQLiteFiles> getSQLiteFileById(Long id) {
@@ -57,5 +68,12 @@ public class SQLiteFilesService {
     SQLiteFiles sqliteFileOptional = findById(sqLiteIsCheckedDTO.getId());
     sqliteFileOptional.setChecked(sqLiteIsCheckedDTO.isChecked());
     this.sqliteFilesRepository.save(sqliteFileOptional);
+  }
+
+  public void createSQLiteFile(SQLiteFileCreateDTO sqLiteFileDTO) {
+    User user = this.accessUserService.findById(sqLiteFileDTO.getUserId());
+    Company company = this.companyService.findById(sqLiteFileDTO.getCompanyId());
+    SQLiteFiles sqLiteFiles = new SQLiteFiles(sqLiteFileDTO.getDate(), user, company, sqLiteFileDTO.getIsCheckd(), sqLiteFileDTO.getSqliteFile());
+    this.sqliteFilesRepository.save(sqLiteFiles);
   }
 }
