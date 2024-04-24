@@ -4,7 +4,7 @@ import com.example.demo.models.User;
 
 import java.util.Date;
 
-public class SQLiteFileGetDTO {
+public class SQLiteFileGetMetaDataDTO {
     private Long id;
     private Date date;
     private User user;
@@ -12,7 +12,7 @@ public class SQLiteFileGetDTO {
     private boolean isChecked;
 
     //Default constructor
-    public SQLiteFileGetDTO(Long id, Date date, User user, boolean isChecked) {
+    public SQLiteFileGetMetaDataDTO(Long id, Date date, User user, boolean isChecked) {
         setId(id);
         setDate(date);
         setUser(user);

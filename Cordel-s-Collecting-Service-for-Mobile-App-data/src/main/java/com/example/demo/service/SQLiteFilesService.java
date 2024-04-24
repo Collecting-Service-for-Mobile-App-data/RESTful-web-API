@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.SQLiteFileCreateDTO;
-import com.example.demo.dto.SQLiteFileGetDTO;
+import com.example.demo.dto.SQLiteFileGetMetaDataDTO;
 import com.example.demo.dto.SQLiteIsCheckedDTO;
 import com.example.demo.models.Company;
 import com.example.demo.models.SQLiteFiles;
@@ -10,7 +10,6 @@ import com.example.demo.repository.SQLiteFilesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,16 +32,15 @@ public class SQLiteFilesService {
   @Autowired
   AccessUserService accessUserService;
 
-  public List<SQLiteFileGetDTO> getAllSQLiteFiles() {
+  public List<SQLiteFileGetMetaDataDTO> getAllSQLiteFiles() {
     List<SQLiteFiles> sqLiteFilesList = this.sqliteFilesRepository.findAll();
-    List<SQLiteFileGetDTO> sqLiteFileslistDTO = sqLiteFilesList.stream()
-            .map(sqLiteFiles -> new SQLiteFileGetDTO(sqLiteFiles.getId(), sqLiteFiles.getDate(), sqLiteFiles.getUser(), sqLiteFiles.isChecked()))
+    return sqLiteFilesList.stream()
+            .map(sqLiteFiles -> new SQLiteFileGetMetaDataDTO(sqLiteFiles.getId(), sqLiteFiles.getDate(), sqLiteFiles.getUser(), sqLiteFiles.isChecked()))
             .collect(Collectors.toList());
-    return sqLiteFileslistDTO;
   }
 
-  public Optional<SQLiteFiles> getSQLiteFileById(Long id) {
-    return sqliteFilesRepository.findById(id);
+  public SQLiteFiles getSQLiteFileById(Long id) {
+    return sqliteFilesRepository.findById(id).orElse(null);
   }
 
   public SQLiteFiles saveSQLiteFile(SQLiteFiles sqliteFiles) {
@@ -75,5 +73,10 @@ public class SQLiteFilesService {
     Company company = this.companyService.findById(sqLiteFileDTO.getCompanyId());
     SQLiteFiles sqLiteFiles = new SQLiteFiles(sqLiteFileDTO.getDate(), user, company, sqLiteFileDTO.getIsCheckd(), sqLiteFileDTO.getSqliteFile());
     this.sqliteFilesRepository.save(sqLiteFiles);
+  }
+
+  public byte[] getSqliteFil(Long id) {
+    SQLiteFiles sqLiteFiles = getSQLiteFileById(id);
+    return sqLiteFiles.getSQLiteFile();
   }
 }
