@@ -75,5 +75,10 @@ public class SQLiteFilesController {
 
     return new ResponseEntity<>(file, headers, HttpStatus.OK);
   }
+  @DeleteMapping("/delete/{id}")
+  public ResponseEntity<Void> deleteFile(@PathVariable Long id) {
+    this.sqliteFilesService.deleteSQLiteFile(id);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
 }
 
