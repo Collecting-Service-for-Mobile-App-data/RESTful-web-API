@@ -1,93 +1,82 @@
-//package com.example.demo.models;
-//
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import static org.junit.jupiter.api.Assertions.*;
-//
-///**
-// * The {@code CompanyTest} class provides unit tests for the {@code Company} model class.
-// * It covers the testing of constructor functionality, property setting and getting,
-// * as well as name validation within the {@code Company} class.
-// */
-//class CompanyTest {
-//
-//    private Company company;
-//
-//    /**
-//     * Prepares the testing environment before each test.
-//     * This method initializes a {@code Company} object with a predefined name
-//     * to facilitate the testing of its properties and validation logic.
-//     */
-//    @BeforeEach
-//    void setUp() {
-//        company = new Company("Example Company");
-//    }
-//
-//    /**
-//     * Tests the constructor of the {@code Company} class that includes a name parameter.
-//     * Verifies that the company name is correctly set through the constructor.
-//     */
-//    @Test
-//    void testConstructorWithName() {
-//        assertEquals("Example Company", company.getName(), "The company name should be set through the constructor");
-//    }
-//
-//    /**
-//     * Tests the functionality of the {@code setName} method in the {@code Company} class.
-//     * Checks that the company name can be successfully changed and retrieved.
-//     */
-//    @Test
-//    void testSetName() {
-//        company.setName("New Example Company");
-//        assertEquals("New Example Company", company.getName(), "The company name should be changeable through setName method");
-//    }
-//
-//    /**
-//     * Tests the setting and getting of a company's ID.
-//     * Ensures that the company ID can be accurately set and then retrieved.
-//     */
-//    @Test
-//    void testSetAndGetId() {
-//        company.setId(1L);
-//        assertEquals(1L, company.getId(), "The company ID should be correctly set and retrieved");
-//    }
-//
-//    /**
-//     * Tests the validity of a company with a valid name.
-//     * Asserts that a company is considered valid when it has a non-null and non-empty name.
-//     */
-//    @Test
-//    void testCompanyValidityWithValidName() {
-//        assertTrue(company.isValid(), "The company should be considered valid with a non-null, non-empty name");
-//    }
-//
-//    /**
-//     * Tests the validity of a company when the name is null.
-//     * Asserts that a company is considered invalid if its name is set to null.
-//     */
-//    @Test
-//    void testCompanyValidityWithNullName() {
-//        company.setName(null);
-//        assertFalse(company.isValid(), "The company should be considered invalid when the name is null");
-//    }
-//
-//    /**
-//     * Tests the validity of a company with an empty name.
-//     * Asserts that a company with an empty name string is considered invalid.
-//     */
-//    @Test
-//    void testCompanyValidityWithEmptyName() {
-//        company.setName("");
-//        assertFalse(company.isValid(), "The company should be considered invalid when the name is empty");
-//    }
-//
-//    /**
-//     * Tests the validity of a company with a blank name (whitespace only).
-//     * Asserts that a company is considered invalid if its name consists only of whitespace.
-//     */
-//    @Test
-//    void testCompanyValidityWithBlankName() {
-//        company.setName(" ");
-//        assertFalse(company.isValid(), "The company should be considered invalid when the name is only whitespace");
-//    }
-//}
+/**
+ * The CompanyTest class contains unit tests for the Company class.
+ * It tests various functionalities such as getting and setting company name,
+ * as well as validating the company's name.
+ */
+package com.example.demo.models;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class CompanyTest {
+
+    private Company company; // Instance of the Company class for testing.
+
+    /**
+     * Sets up the test environment before each test method execution.
+     * Instantiates a Company object with the name "Test Company".
+     */
+    @BeforeEach
+    void setUp() {
+        this.company = new Company("Test Company");
+    }
+
+    /**
+     * Tests the getName() method of the Company class.
+     * Verifies that the correct name is returned.
+     */
+    @Test
+    void testGetName() {
+        assertEquals("Test Company", this.company.getName());
+    }
+
+    /**
+     * Tests the setName() method of the Company class.
+     * Verifies that the name is correctly set.
+     */
+    @Test
+    void testSetName() {
+        this.company.setName("New Name");
+        assertEquals("New Name", this.company.getName());
+    }
+
+    /**
+     * Tests the isValid() method of the Company class with a valid name.
+     * Verifies that the company is considered valid.
+     */
+    @Test
+    void testIsValidWithValidName() {
+        assertTrue(this.company.isValid());
+    }
+
+    /**
+     * Tests the isValid() method of the Company class with an empty name.
+     * Verifies that the company is considered invalid.
+     */
+    @Test
+    void testIsValidWithEmptyName() {
+        this.company.setName("");
+        assertFalse(this.company.isValid());
+    }
+
+    /**
+     * Tests the isValid() method of the Company class with a null name.
+     * Verifies that the company is considered invalid.
+     */
+    @Test
+    void testIsValidWithNullName() {
+        this.company.setName(null);
+        assertFalse(this.company.isValid());
+    }
+
+    /**
+     * Tests the isValid() method of the Company class with a whitespace name.
+     * Verifies that the company is considered invalid.
+     */
+    @Test
+    void testIsValidWithWhitespaceName() {
+        this.company.setName("   ");
+        assertFalse(this.company.isValid());
+    }
+}

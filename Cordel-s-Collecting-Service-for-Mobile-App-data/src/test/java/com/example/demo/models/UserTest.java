@@ -1,110 +1,173 @@
-//package com.example.demo.models;
-//
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import java.util.HashSet;
-//import static org.junit.jupiter.api.Assertions.*;
-//
-///**
-// * The {@code UserTest} class contains unit tests for testing the behaviors and functionalities
-// * of the {@code User} class. It ensures that the {@code User} class properly handles initialization,
-// * role management, and state checks.
-// */
-//class UserTest {
-//
-//    private User user;
-//    private Role adminRole;
-//    private Company company;
-//
-//    /**
-//     * Sets up common objects for testing.
-//     * This method is executed before each test method. It initializes a new {@code User} object,
-//     * an admin {@code Role}, and a {@code Company} object, and associates them appropriately
-//     * for testing different functionalities of the {@code User} class.
-//     */
-//    @BeforeEach
-//    void setUp() {
-//        user = new User("test@example.com", "password");
-//        adminRole = new Role();
-//        adminRole.setName("ROLE_ADMIN");
-//        company = new Company();
-//        company.setName("Test Company");
-//        user.setCompany(company);
-//    }
-//
-//    /**
-//     * Tests the constructor of the {@code User} class with explicit username and password.
-//     * Asserts that the created {@code User} object correctly stores the provided email and password.
-//     */
-//    @Test
-//    void testUserConstructor() {
-//        User user = new User("testusername", "testuserpassword");
-//        assertEquals("testusername", user.getEmail());
-//        assertEquals("testuserpassword", user.getPassword());
-//    }
-//
-//    /**
-//     * Tests the constructor of the {@code User} class with blank email and password.
-//     * Asserts that the constructor does not throw an error and correctly sets both fields, even if they are blank.
-//     */
-//    @Test
-//    void testConstructorWithBlankEmailAndPassword() {
-//        String email = "";
-//        String password = "";
-//        User user = new User(email, password);
-//
-//        assertTrue(email.equals(user.getEmail()) && password.equals(user.getPassword()),
-//                "Constructor should set email and password, even if they are blank");
-//    }
-//
-//    /**
-//     * Verifies that a new {@code User} is active by default.
-//     * Asserts the default active state of a user without any explicit activation.
-//     */
-//    @Test
-//    void testUserIsActiveByDefault() {
-//        assertTrue(user.isActive(), "User should be active by default");
-//    }
-//
-//    /**
-//     * Tests the addition of a role to a user.
-//     * Asserts that after adding a role to a user, the user indeed has that role.
-//     */
-//    @Test
-//    void testAddRole() {
-//        user.addRole(adminRole);
-//        assertTrue(user.getRoles().contains(adminRole), "User roles should include the added role");
-//    }
-//
-//    /**
-//     * Tests if a user is recognized as an admin after adding an admin role.
-//     * Asserts that the user is considered an admin after the admin role has been added.
-//     */
-//    @Test
-//    void testIsAdmin() {
-//        user.addRole(adminRole);
-//        assertTrue(user.isAdmin(), "User should be an admin after adding admin role");
-//    }
-//
-//    /**
-//     * Verifies that a user has a specific role by name.
-//     * Asserts that the user has the specified role after it has been added.
-//     */
-//    @Test
-//    void testHasRole() {
-//        user.addRole(adminRole);
-//        assertTrue(user.hasRole("ROLE_ADMIN"), "User should have ROLE_ADMIN");
-//    }
-//
-//    /**
-//     * Tests the validity of a user based on the presence of email, password, role, and company.
-//     * Asserts that a user with these properties set is considered valid.
-//     */
-//    @Test
-//    void testIsValid() {
-//        HashSet<Role> roles = new HashSet<>();
-//        roles.add(adminRole);
-//        user.setRoles(roles);
-//        assertTrue(user.isValid(), "User should be valid with email, password, role, and company");
-//    }
-//}
+/**
+ * The UserTest class contains unit tests for the User class.
+ * It tests various functionalities such as getting and setting user attributes,
+ * as well as validating the user object.
+ */
+package com.example.demo.models;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class UserTest {
+
+    private User user; // Instance of the User class for testing.
+    private Company company; // Company associated with the user.
+
+    /**
+     * Sets up the test environment before each test method execution.
+     * Instantiates a Company and User object with test data.
+     */
+    @BeforeEach
+    public void setUp() {
+        this.company = new Company("Test Company");
+        this.user = new User("test@example.com", "password", this.company);
+    }
+
+    /**
+     * Tests the getEmail() method of the User class.
+     * Verifies that the correct email is returned.
+     */
+    @Test
+    void testGetEmail() {
+        assertEquals("test@example.com", this.user.getEmail());
+    }
+
+    /**
+     * Tests the setEmail() method of the User class.
+     * Verifies that the email attribute is correctly set.
+     */
+    @Test
+    void testSetEmail() {
+        this.user.setEmail("newemail@example.com");
+        assertEquals("newemail@example.com", this.user.getEmail());
+    }
+
+    /**
+     * Tests the getPassword() method of the User class.
+     * Verifies that the correct password is returned.
+     */
+    @Test
+    void testGetPassword() {
+        assertEquals("password", this.user.getPassword());
+    }
+
+    /**
+     * Tests the setPassword() method of the User class.
+     * Verifies that the password attribute is correctly set.
+     */
+    @Test
+    void testSetPassword() {
+        this.user.setPassword("newPassword");
+        assertEquals("newPassword", this.user.getPassword());
+    }
+
+    /**
+     * Tests the getCompany() method of the User class.
+     * Verifies that the correct company is returned.
+     */
+    @Test
+    void testGetCompany() {
+        assertEquals(this.company, this.user.getCompany());
+    }
+
+    /**
+     * Tests the setCompany() method of the User class.
+     * Verifies that the company attribute is correctly set.
+     */
+    @Test
+    void testSetCompany() {
+        Company newCompany = new Company("New Company");
+        this.user.setCompany(newCompany);
+        assertEquals(newCompany, this.user.getCompany());
+    }
+
+    /**
+     * Tests the isValid() method of the User class with valid data.
+     * Verifies that the user object is considered valid.
+     */
+    @Test
+    void testIsValidWithValidData() {
+        assertTrue(this.user.isValid());
+    }
+
+    /**
+     * Tests the isValid() method of the User class with a null email.
+     * Verifies that the user object is considered invalid.
+     */
+    @Test
+    void testIsValidWithNullEmail() {
+        this.user.setEmail(null);
+        assertFalse(this.user.isValid());
+    }
+
+    /**
+     * Tests the isValid() method of the User class with an empty email.
+     * Verifies that the user object is considered invalid.
+     */
+    @Test
+    void testIsValidWithEmptyEmail() {
+        this.user.setEmail("");
+        assertFalse(this.user.isValid());
+    }
+
+    /**
+     * Tests the isValid() method of the User class with a whitespace email.
+     * Verifies that the user object is considered invalid.
+     */
+    @Test
+    void testIsValidWithWhitespaceEmail() {
+        this.user.setEmail("   ");
+        assertFalse(this.user.isValid());
+    }
+
+    /**
+     * Tests the isValid() method of the User class with a null password.
+     * Verifies that the user object is considered invalid.
+     */
+    @Test
+    void testIsValidWithNullPassword() {
+        this.user.setPassword(null);
+        assertFalse(this.user.isValid());
+    }
+
+    /**
+     * Tests the isValid() method of the User class with an empty password.
+     * Verifies that the user object is considered invalid.
+     */
+    @Test
+    void testIsValidWithEmptyPassword() {
+        this.user.setPassword("");
+        assertFalse(this.user.isValid());
+    }
+
+    /**
+     * Tests the isValid() method of the User class with a whitespace password.
+     * Verifies that the user object is considered invalid.
+     */
+    @Test
+    void testIsValidWithWhitespacePassword() {
+        this.user.setPassword("   ");
+        assertFalse(this.user.isValid());
+    }
+
+    /**
+     * Tests the isValid() method of the User class with a null company.
+     * Verifies that the user object is considered invalid.
+     */
+    @Test
+    void testIsValidWithNullCompany() {
+        this.user.setCompany(null);
+        assertFalse(this.user.isValid());
+    }
+
+    /**
+     * Tests the isValid() method of the User class with null roles.
+     * Verifies that the user object is considered invalid.
+     */
+    @Test
+    void testIsValidWithNullRoles() {
+        this.user.setRoles(null);
+        assertFalse(this.user.isValid());
+    }
+}

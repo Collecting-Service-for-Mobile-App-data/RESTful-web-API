@@ -16,6 +16,7 @@ public class SignupDto {
     @ApiModelProperty(notes = "Password for the user")
     private final String password;
 
+    @ApiModelProperty(notes = "Company for the user")
     private final Company company;
 
     public SignupDto(String username, String password, Company company) {

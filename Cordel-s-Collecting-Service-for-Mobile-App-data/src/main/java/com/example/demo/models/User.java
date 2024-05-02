@@ -12,6 +12,9 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * The User class represents a user entity in the system.
+ */
 @Entity
 @Table(name = "user")
 @ApiModel(description = "Representation of a user in the system")
@@ -38,9 +41,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new LinkedHashSet<>();
-
-    @ApiModelProperty(notes = "The token used for resetting the user's password")
-    private String resetPasswordToken;
 
     private boolean active = true;
 
@@ -103,15 +103,6 @@ public class User {
     }
 
     /**
-     * Retrieves the reset password token of the user.
-     *
-     * @return The reset password token of the user.
-     */
-    public String getResetPasswordToken() {
-        return resetPasswordToken;
-    }
-
-    /**
      * Sets the ID of the user.
      *
      * @param id The ID to set for the user.
@@ -145,15 +136,6 @@ public class User {
      */
     public void setRole(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    /**
-     * Sets the reset password token of the user.
-     *
-     * @param resetPasswordToken The reset password token to set for the user.
-     */
-    public void setResetPasswordToken(String resetPasswordToken) {
-        this.resetPasswordToken = resetPasswordToken;
     }
 
     /**
@@ -244,7 +226,8 @@ public class User {
      * @return True if the user is valid, otherwise false.
      */
     public boolean isValid() {
-        return !" ".equals(this.email) && !" ".equals(this.password) && this.email != null && this.password != null
-                && this.company != null && this.roles != null;
+        return this.email != null && !this.email.trim().isEmpty() &&
+                this.password != null && !this.password.trim().isEmpty() &&
+                this.company != null && this.roles != null;
     }
 }

@@ -6,12 +6,15 @@ package com.example.demo.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiModel;
 
+
+/**
+ * Represents a role for the user in the application.
+ */
 @Entity
 @Table(name = "role")
 @ApiModel(description = "Representation of a role in the system")
@@ -85,6 +88,6 @@ public class Role {
      * @return True if the role is valid, otherwise false.
      */
     public boolean isValid() {
-        return !" ".equals(this.name) && this.name != null && !this.name.isEmpty();
+        return this.name != null && !this.name.trim().isEmpty();
     }
 }

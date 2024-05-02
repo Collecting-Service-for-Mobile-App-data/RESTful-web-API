@@ -16,10 +16,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service class implementing {@link UserDetailsService} for managing {@link User} entities.
+ */
 @Service
 public class AccessUserService implements UserDetailsService {
 
@@ -168,10 +170,20 @@ public class AccessUserService implements UserDetailsService {
         return users;
     }
 
+    /**
+     * Return user based on user id.
+     * @param id of the user you want to find.
+     * @return user.
+     */
     public User findById(Long id) {
         return this.userRepository.findById(id).orElse(null);
     }
 
+    /**
+     * Return a User DTO based on a user id
+     * @param id of the user that you want to return user DTO of
+     * @return User DTO
+     */
     public UserDTO findUserDTOById(Long id) {
         User user = findById(id);
         UserDTO userDTO = new UserDTO(user.getId(), user.getEmail(), user.getCompany());

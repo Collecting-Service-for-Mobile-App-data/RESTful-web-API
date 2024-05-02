@@ -1,93 +1,82 @@
-//package com.example.demo.models;
-//
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import static org.junit.jupiter.api.Assertions.*;
-//
-///**
-// * The {@code RoleTest} class implements unit tests for the {@code Role} model class.
-// * It focuses on testing the creation and manipulation of {@code Role} objects, including
-// * setting and getting properties such as name and ID, as well as validating role names.
-// */
-//class RoleTest {
-//
-//    private Role role;
-//
-//    /**
-//     * Sets up a new {@code Role} object before each test.
-//     * This method initializes a {@code Role} object with a predefined name "ROLE_USER"
-//     * to be used in subsequent tests.
-//     */
-//    @BeforeEach
-//    void setUp() {
-//        role = new Role("ROLE_USER");
-//    }
-//
-//    /**
-//     * Tests the {@code Role} constructor with a name parameter.
-//     * Asserts that the role name is correctly set through the constructor.
-//     */
-//    @Test
-//    void testConstructorWithName() {
-//        assertEquals("ROLE_USER", role.getName(), "The role name should be set through the constructor");
-//    }
-//
-//    /**
-//     * Tests the ability to change a role's name using {@code setName}.
-//     * Asserts that the role name can be changed and correctly retrieved afterwards.
-//     */
-//    @Test
-//    void testSetName() {
-//        role.setName("ROLE_ADMIN");
-//        assertEquals("ROLE_ADMIN", role.getName(), "The role name should be changeable through setName method");
-//    }
-//
-//    /**
-//     * Tests setting and getting a role's ID.
-//     * Asserts that the role ID can be set and correctly retrieved.
-//     */
-//    @Test
-//    void testSetAndGetId() {
-//        role.setId(1L);
-//        assertEquals(1L, role.getId(), "The role ID should be correctly set and retrieved");
-//    }
-//
-//    /**
-//     * Tests the validity of a role with a valid name.
-//     * Asserts that a role with a non-null, non-empty name is considered valid.
-//     */
-//    @Test
-//    void testRoleValidityWithValidName() {
-//        assertTrue(role.isValid(), "The role should be considered valid with a non-null, non-empty name");
-//    }
-//
-//    /**
-//     * Tests the role validity when the name is set to null.
-//     * Asserts that a role with a null name is considered invalid.
-//     */
-//    @Test
-//    void testRoleValidityWithNullName() {
-//        role.setName(null);
-//        assertFalse(role.isValid(), "The role should be considered invalid when the name is null");
-//    }
-//
-//    /**
-//     * Tests the role validity when the name is an empty string.
-//     * Asserts that a role with an empty name is considered invalid.
-//     */
-//    @Test
-//    void testRoleValidityWithEmptyName() {
-//        role.setName("");
-//        assertFalse(role.isValid(), "The role should be considered invalid when the name is empty");
-//    }
-//
-//    /**
-//     * Tests the role validity when the name is a blank string (whitespace only).
-//     * Asserts that a role with a name that is only whitespace is considered invalid.
-//     */
-//    @Test
-//    void testRoleValidityWithBlankName() {
-//        role.setName(" ");
-//        assertFalse(role.isValid(), "The role should be considered invalid when the name is only whitespace");
-//    }
-//}
+/**
+ * The RoleTest class contains unit tests for the Role class.
+ * It tests various functionalities such as getting and setting role name,
+ * as well as validating the role's name.
+ */
+package com.example.demo.models;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class RoleTest {
+
+    private Role role; // Instance of the Role class for testing.
+
+    /**
+     * Sets up the test environment before each test method execution.
+     * Instantiates a Role object with the name "Test Role".
+     */
+    @BeforeEach
+    void setUp() {
+        this.role = new Role("Test Role");
+    }
+
+    /**
+     * Tests the getName() method of the Role class.
+     * Verifies that the correct name is returned.
+     */
+    @Test
+    void testGetName() {
+        assertEquals("Test Role", this.role.getName());
+    }
+
+    /**
+     * Tests the setName() method of the Role class.
+     * Verifies that the name is correctly set.
+     */
+    @Test
+    void testSetName() {
+        this.role.setName("New Name");
+        assertEquals("New Name", this.role.getName());
+    }
+
+    /**
+     * Tests the isValid() method of the Role class with a valid name.
+     * Verifies that the role is considered valid.
+     */
+    @Test
+    void testIsValidWithValidName() {
+        assertTrue(this.role.isValid());
+    }
+
+    /**
+     * Tests the isValid() method of the Role class with an empty name.
+     * Verifies that the role is considered invalid.
+     */
+    @Test
+    void testIsValidWithEmptyName() {
+        this.role.setName("");
+        assertFalse(this.role.isValid());
+    }
+
+    /**
+     * Tests the isValid() method of the Role class with a null name.
+     * Verifies that the role is considered invalid.
+     */
+    @Test
+    void testIsValidWithNullName() {
+        this.role.setName(null);
+        assertFalse(this.role.isValid());
+    }
+
+    /**
+     * Tests the isValid() method of the Role class with a whitespace name.
+     * Verifies that the role is considered invalid.
+     */
+    @Test
+    void testIsValidWithWhitespaceName() {
+        this.role.setName("   ");
+        assertFalse(this.role.isValid());
+    }
+}

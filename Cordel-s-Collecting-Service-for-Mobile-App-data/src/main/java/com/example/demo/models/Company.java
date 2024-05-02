@@ -11,6 +11,9 @@ import java.util.Set;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiModel;
 
+/**
+ * Represent the company in the application.
+ */
 @Entity
 @Table(name = "company")
 @ApiModel(description = "Representation of a company in the system")
@@ -80,6 +83,6 @@ public class Company {
      * @return True if the company is valid, otherwise false.
      */
     public boolean isValid() {
-        return !" ".equals(this.name) && this.name != null && !this.name.isEmpty();
+        return this.name != null && !this.name.trim().isEmpty();
     }
 }

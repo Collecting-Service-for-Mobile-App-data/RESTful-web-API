@@ -9,12 +9,21 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AccessUserDetails implements UserDetails{
+/**
+ * Custom UserDetails implementation for managing user details in the application's security context.
+ */
+public class AccessUserDetails implements UserDetails {
+
     private final String username;
     private final String password;
     private final boolean isActive;
     private final Set<GrantedAuthority> authorities = new HashSet<>();
 
+    /**
+     * Constructs a new AccessUserDetails instance based on the provided user.
+     *
+     * @param user The user object containing user details.
+     */
     public AccessUserDetails(User user) {
         this.username = user.getEmail();
         this.password = user.getPassword();
