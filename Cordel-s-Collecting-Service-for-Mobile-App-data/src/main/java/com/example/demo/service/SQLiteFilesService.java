@@ -94,9 +94,15 @@ public class SQLiteFilesService {
    * @param id The ID of the company to retrieve files from.
    * @return A list of SQLite files associated with the company.
    */
-  public List<SQLiteFiles> getAllByCompany(Long id) {
+  public List<SQLiteFileGetMetaDataDTO> getAllByCompany(Long id) {
     Company company = this.companyService.findById(id);
-    return this.sqliteFilesRepository.findAllByCompany(company);
+     List<SQLiteFiles> sqLiteFilesList = this.sqliteFilesRepository.findAllByCompany(company);
+     if(sqLiteFilesList.isEmpty()) {
+       return null;
+     }
+    return sqLiteFilesList.stream()
+            .map(sqLiteFiles -> new SQLiteFileGetMetaDataDTO(sqLiteFiles.getId(), sqLiteFiles.getDate(), sqLiteFiles.getUser(), sqLiteFiles.isChecked()))
+            .collect(Collectors.toList());
   }
 
   /**
