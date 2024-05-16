@@ -67,7 +67,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/api/sqlite-files/all").hasRole("ADMIN")
                 .requestMatchers("/api/sqlite-files/").hasAnyRole("USER","ADMIN")
                 .requestMatchers("/api/role/all").hasRole("ADMIN")
-                .requestMatchers("/api/company/companies").hasRole("ADMIN")
+                .requestMatchers("/api/company/companies").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
