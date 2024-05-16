@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import io.swagger.annotations.*;
 
@@ -29,6 +30,8 @@ public class SQLiteFilesController {
   @Autowired
   private SQLiteFilesService sqliteFilesService;
 
+  private static final Logger LOGGER = Logger.getLogger(SQLiteFilesController.class.getName());
+
   /**
    * Retrieves all SQLite files associated with a specific company ID.
    *
@@ -43,11 +46,14 @@ public class SQLiteFilesController {
   @GetMapping("/company/{id}")
   public ResponseEntity<?> getAllSQLiteFilesByCompany(@ApiParam(value = "Company ID to fetch SQLite files", required = true) @PathVariable long id) {
     try {
-      List<SQLiteFiles> sqLiteFiles = this.sqliteFilesService.getAllByCompany(id);
-      return new ResponseEntity<>(sqLiteFiles, HttpStatus.OK);
+      List<SQLiteFileGetMetaDataDTO> sqLiteFiles = this.sqliteFilesService.getAllByCompany(id);
+      if(sqLiteFiles != null) {
+        return new ResponseEntity<>(sqLiteFiles, HttpStatus.OK);
+      }
     } catch (Exception e) {
-      return new ResponseEntity<>("Failed to retrieve SQLite files for company", HttpStatus.INTERNAL_SERVER_ERROR);
+      LOGGER.severe("Something whent wronge" + e.getMessage());
     }
+    return new ResponseEntity<>("Failed to retrieve SQLite files for company", HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   /**

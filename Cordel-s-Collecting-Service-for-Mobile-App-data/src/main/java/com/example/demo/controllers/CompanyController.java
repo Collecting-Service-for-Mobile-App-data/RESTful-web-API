@@ -16,13 +16,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Controller for handling operations related to companies within the system.
  * Provides endpoints for retrieving a list of all companies.
  */
 @Api(value = "CompanyController", description = "Controller for managing companies")
-@Controller
+@RestController
 @RequestMapping("/api/company")
 public class CompanyController {
 

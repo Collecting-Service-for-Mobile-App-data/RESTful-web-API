@@ -42,11 +42,11 @@ public class User {
     )
     private Set<Role> roles = new LinkedHashSet<>();
 
-    private boolean active = true;
-
     @ManyToOne
     @ApiModelProperty(notes = "The company associated with the user")
     private Company company;
+
+    private boolean active = true;
 
     /**
      * Constructs a user object with the given email, password, and role.

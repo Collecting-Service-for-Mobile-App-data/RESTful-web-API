@@ -186,6 +186,9 @@ public class AccessUserService implements UserDetailsService {
      */
     public UserDTO findUserDTOById(Long id) {
         User user = findById(id);
+        if(user == null) {
+            return null;
+        }
         UserDTO userDTO = new UserDTO(user.getId(), user.getEmail(), user.getCompany());
         return userDTO;
     }

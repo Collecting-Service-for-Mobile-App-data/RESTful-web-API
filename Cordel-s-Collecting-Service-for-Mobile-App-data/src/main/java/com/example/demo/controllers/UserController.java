@@ -30,7 +30,7 @@ import io.swagger.annotations.*;
  * Controller for managing user-related operations in the API.
  */
 @Api(value = "UserController", description = "Controller for user management operations")
-@Controller
+@RestController
 @RequestMapping("/api/user")
 public class UserController {
 
@@ -178,10 +178,12 @@ public class UserController {
     public ResponseEntity<UserDTO> getUserById(@ApiParam(value = "The ID of the user", required = true) @PathVariable Long id) {
         try {
             UserDTO userDTO = this.accessUserService.findUserDTOById(id);
-            return new ResponseEntity<>(userDTO, HttpStatus.OK);
+            if(userDTO != null) {
+                return new ResponseEntity<>(userDTO, HttpStatus.OK);
+            }
         } catch (IllegalArgumentException e) {
             LOGGER.severe(SEVERE + e.getMessage());
-            return ResponseEntity.badRequest().body(null);
         }
+        return new  ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
     }
 }

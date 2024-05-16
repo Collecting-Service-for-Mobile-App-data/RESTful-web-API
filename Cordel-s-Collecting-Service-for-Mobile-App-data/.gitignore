@@ -35,3 +35,9 @@ build/
 ### Ignore the .env that conteins security keys ###
 .env
 env.properties
+
+### Ignore the SSL Key
+*.p12
+*.pem
+*.crt
+*.key
