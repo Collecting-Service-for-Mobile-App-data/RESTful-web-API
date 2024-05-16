@@ -14,13 +14,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Controller responsible for managing roles within the application.
  * This includes operations to retrieve all roles defined in the system.
  */
 @Api(value = "RoleController", description = "Controller for managing roles")
-@Controller
+@RestController
 @RequestMapping("/api/role")
 public class RoleController {
 

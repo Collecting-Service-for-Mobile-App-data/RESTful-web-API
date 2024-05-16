@@ -30,7 +30,7 @@ import io.swagger.annotations.*;
  * Controller for managing user-related operations in the API.
  */
 @Api(value = "UserController", description = "Controller for user management operations")
-@Controller
+@RestController
 @RequestMapping("/api/user")
 public class UserController {
 
