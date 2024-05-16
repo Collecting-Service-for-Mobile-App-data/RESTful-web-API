@@ -11,6 +11,9 @@ import java.util.Set;
 
 /**
  * Custom UserDetails implementation for managing user details in the application's security context.
+ * Code in this class have been taken from:
+ * https://github.com/strazdinsg/app-dev/blob/main/security-demos/07-backend-frontend-jwt-auth/backend/src/main/java/no/ntnu/security/AccessUserDetails.java
+ *
  */
 public class AccessUserDetails implements UserDetails {
 

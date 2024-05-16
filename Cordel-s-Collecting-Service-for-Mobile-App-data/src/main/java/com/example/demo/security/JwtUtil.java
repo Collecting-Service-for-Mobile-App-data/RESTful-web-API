@@ -11,7 +11,8 @@ import java.util.function.Function;
 
 /**
  * Utility class for handling JWT tokens
- * Code from https://youtu.be/X80nJ5T7YpE
+ * Code in this class have been taken from:
+ * https://github.com/strazdinsg/app-dev/blob/main/security-demos/07-backend-frontend-jwt-auth/backend/src/main/java/no/ntnu/security/JwtUtil.java
  */
 @Component
 public class JwtUtil {

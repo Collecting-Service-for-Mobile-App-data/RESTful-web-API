@@ -16,6 +16,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 /**
  * Creates AuthenticationManager - set up authentication type.
+ * Code in this class have been taken and modify from:
+ * https://github.com/strazdinsg/app-dev/blob/main/security-demos/07-backend-frontend-jwt-auth/backend/src/main/java/no/ntnu/security/SecurityConfiguration.java
  */
 @Configuration
 public class SecurityConfiguration {

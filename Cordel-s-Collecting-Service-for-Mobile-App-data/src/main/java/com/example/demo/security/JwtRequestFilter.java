@@ -21,6 +21,8 @@ import java.io.IOException;
 /**
  * A filter that is applied to all HTTP requests and checks for a valid JWT token in
  * the `Authorization: Bearer ...` header.
+ * Code in this class have been taken from:
+ * https://github.com/strazdinsg/app-dev/blob/main/security-demos/07-backend-frontend-jwt-auth/backend/src/main/java/no/ntnu/security/JwtRequestFilter.java
  */
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
